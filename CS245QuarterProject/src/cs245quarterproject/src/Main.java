@@ -11,7 +11,8 @@ package cs245quarterproject.src;
  * class: Computer Programming
  * Graphical User Interfaces - CS245
  *
- * assignment: Program 1 date last modified: 10/09/2017
+ * assignment: Program 1 
+ * date last modified: 10/09/2017
  *
  * purpose: Defines the Driver of the entire program
  * **************************************************************
@@ -23,6 +24,7 @@ import javax.swing.*;
  * @author fabian
  */
 public class Main {
+    public static String[] SCORE = new String[5]; //used later for highscores
 
     public static void main(String[] args) {
         new TitleScreen();
