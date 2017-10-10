@@ -5,9 +5,7 @@ package cs245quarterproject.src;
  * author: Tomik Aghajanian 
  * class: Computer Programming
  * Graphical User Interfaces - CS245
- *
  * assignment: Program 1 date last modified: 10/09/2017
- *
  * purpose: Defines a word bank class
  * **************************************************************
  **/

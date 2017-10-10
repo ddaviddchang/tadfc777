@@ -5,12 +5,11 @@ import javax.swing.JFrame;
 
 /**
  * *************************************************************
- * file: HighScores.java author: Tomik Aghajanian 
+ * file: HighScores.java 
+ * author: Diaz Disciples (Group name)
  * class: Computer Programming
  * Graphical User Interfaces - CS245
- *
  * assignment: Program 1 date last modified: 10/09/2017
- *
  * purpose: Defines the HighScores screen
  * **************************************************************
  **/

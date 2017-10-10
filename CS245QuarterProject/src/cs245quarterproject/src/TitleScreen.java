@@ -1,23 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cs245quarterproject.src;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
-
-
 /**
  * *************************************************************
  * file: Title.java 
- * author: 
+ * author: Diaz Disciples (Group name)
  * class: Computer Programming
  * Graphical User Interfaces - CS245
- *
  * assignment: Program 1 date last modified: 10/09/2017
- *
  * purpose: Defines the Title screen
  * **************************************************************
  **/

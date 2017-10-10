@@ -2,11 +2,10 @@ package cs245quarterproject.src;
 
 /**
  * *************************************************************
- * file: HangmanGameUI.java author: Tomik Aghajanian class: Computer Programming
+ * file: HangmanGameUI.java author: Tomik Aghajanian 
+ * class: Computer Programming
  * Graphical User Interfaces - CS245
- *
  * assignment: Program 1 date last modified: 10/09/2017
- *
  * purpose: Defines the GUI of the hangman game as well as the logic.
  * **************************************************************
  *
