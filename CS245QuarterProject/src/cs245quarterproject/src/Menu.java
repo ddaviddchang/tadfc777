@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cs245quarterproject.src;
 
 import java.awt.Color;
@@ -10,9 +5,17 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 /**
+ * *************************************************************
+ * file: Menu.java
+ * author: Tomik Aghajanian 
+ * class: Computer Programming
+ * Graphical User Interfaces - CS245
  *
- * @author mannyjuarez
- */
+ * assignment: Program 1 date last modified: 10/09/2017
+ *
+ * purpose: Defines the Menu screen
+ * **************************************************************
+ **/
 public class Menu extends javax.swing.JFrame {
 
     /**
@@ -21,7 +24,7 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         
-        this.setTitle("Main Screen");
+        this.setTitle("Main Menu");
         this.getContentPane().setBackground(Color.WHITE);
         this.setSize(new Dimension(600, 400));
         this.pack();
@@ -47,7 +50,7 @@ public class Menu extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(600, 400));
         setMinimumSize(new java.awt.Dimension(600, 400));
         setPreferredSize(new java.awt.Dimension(600, 400));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton1.setText("HighScores");
@@ -56,7 +59,7 @@ public class Menu extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, 190, 50));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, 190, 50));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton2.setText("Credits");
@@ -65,7 +68,7 @@ public class Menu extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, 190, 50));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, 190, 50));
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton3.setText("Play");
@@ -74,12 +77,12 @@ public class Menu extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 190, 50));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 190, 50));
 
         labelPictureHangman.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         labelPictureHangman.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/logo.png"))); // NOI18N
-        add(labelPictureHangman, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 300, 310));
+        getContentPane().add(labelPictureHangman, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 300, 310));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

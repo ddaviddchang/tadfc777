@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 
 /**
  * *************************************************************
- * file: GameOverGUI.java author: Tomik Aghajanian 
+ * file: HighScores.java author: Tomik Aghajanian 
  * class: Computer Programming
  * Graphical User Interfaces - CS245
  *
