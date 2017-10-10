@@ -8,7 +8,6 @@ import javax.swing.JFrame;
  * author: Diaz Disciples (Group name)
  * class: Computer Programming
  * Graphical User Interfaces - CS245
- * assignment: Program 1 date last modified: 10/09/2017
  * purpose: Defines the Credits screen
  * **************************************************************
  *
@@ -47,18 +46,18 @@ public class Credits extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(600, 400));
         setName(""); // NOI18N
         setPreferredSize(new java.awt.Dimension(600, 400));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("<html>\n<p>Name, Bronco #<br>\nName, Bronco #<br>\nName, Bronco #<br>\nName, Bronco #<br>\n</p>\n</html>");
+        jLabel2.setText("<html> <p>Tomik Aghajanian, 011353849<br> Christian Munoz, 010817014<br> Emanuel Juarez,  009631258<br> David Chang, 009074689 <br>Fabian Flores, 010913838<br> </p> </html>");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 133, 175));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 260, 210));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
         jLabel1.setText("CREDITS");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, -1, 43));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, -1, 43));
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +65,7 @@ public class Credits extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 90, 30));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 90, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
