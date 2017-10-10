@@ -5,15 +5,12 @@
  */
 package cs245quarterproject.src;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-
-
 
 //class: WordBank
 //purpose of class: This class returns a word to the PlayScreen and it also creates the format of the hint.

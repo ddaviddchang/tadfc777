@@ -1,10 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cs245quarterproject.src;
 
+/**
+ * *************************************************************
+ * file: HangmanGameUI.java author: Tomik Aghajanian class: Computer Programming
+ * Graphical User Interfaces - CS245
+ *
+ * assignment: Program 1 date last modified: 10/09/2017
+ *
+ * purpose: Defines the GUI of the hangman game as well as the logic.
+ * **************************************************************
+ *
+ */
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
@@ -21,10 +27,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-/**
- *
- * @author Tomik
- */
 public class HangmanGameUI extends javax.swing.JFrame {
 
     public Point center;
@@ -37,7 +39,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
     private final int maxWrong = 6;
     private String score;
     public boolean guess;
-    public CheckWord cw;
+    public WordChecker wordChecker;
 
     /**
      * Creates new form HangmanGameUI
@@ -49,7 +51,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
         this.setSize(new Dimension(600, 400));
         this.pack();
         this.setVisible(true);
-        
+
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         center = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
@@ -59,24 +61,21 @@ public class HangmanGameUI extends javax.swing.JFrame {
         displayWordFormat();
     }
 
-
-    //method: currentTime
-    //purpose: This method updates the second in the clock by having the thread resume after being
-    //put to sleep for 1 second so that it can update the seconds.
+    //method: currentDateAndTime()
+    //purpose: Updates the time and date and puts it in the appropriate label
     public void currentDateAndTime() {
         Thread clock = new Thread() {
             public void run() {
                 for (;;) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("MMMMMMMMMMM dd, yyyy");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("MMMMMMMMMMM dd, yyyy");
                     Date today = new Date();
-                    String date = sdf.format(today);
+                    String date = dateFormat.format(today);
 
                     Calendar cal = new GregorianCalendar();
                     int second = cal.get(Calendar.SECOND);
                     int minute = cal.get(Calendar.MINUTE);
                     int hour = cal.get(Calendar.HOUR);
                     labelDateTime.setText(date + "  " + hour + ":" + minute + ":" + second);
-
                     try {
                         sleep(1000);
                     } catch (Exception e) {
@@ -86,6 +85,77 @@ public class HangmanGameUI extends javax.swing.JFrame {
             }
         };
         clock.start();
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new HangmanGameUI().setVisible(true);
+            }
+        });
+    }
+
+    public void displayGuessedString() {
+        numWrong = wordChecker.numberOfWrongGuesses;
+        jLabel6.setText(guessedString);
+        if (numWrong > 0 && !guess) {
+            if (numWrong <= maxWrong) {
+                switch (numWrong) {
+                    case 1:
+                        labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_1.png"))); // NOI18N
+                        score = "90";
+                        break;
+                    case 2:
+                        labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_2.png"))); // NOI18N
+                        score = "80";
+                        break;
+                    case 3:
+                        labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_3.png"))); // NOI18N
+                        score = "70";
+                        break;
+                    case 4:
+                        labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_4.png"))); // NOI18N
+                        score = "60";
+                        break;
+                    case 5:
+                        labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_5.png"))); // NOI18N
+                        score = "50";
+                        break;
+                    case 6:
+                        labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_6.png"))); // NOI18N
+                        score = "40";
+                        labelWrongOrCorrect.setText("Incorrect!!!");
+                        dispose();
+                        break;
+                }
+                scoreLabel.setText(score);
+            }
+        } else if (guess) {
+            labelWrongOrCorrect.setText("Correct!!!");
+            if (wordChecker.checkGuesses()) {
+                dispose();
+            }
+        }
+    }
+
+    private void performSomeTask(JButton b, char l) {
+        b.setEnabled(false);
+        guess = wordChecker.checkLetter(l);
+        guessedString = wordChecker.guessCorrectlyFormat;
+        displayGuessedString();
+    }
+
+    //method: displayWordFormat
+    //purpose: This method gets the hint, or the "_ _ _" for each word and displays it to the screen.
+    public void displayWordFormat() {
+        wordToGuess = wb.getWord();
+        wordToGuessFormat = wb.getWordFormat();
+        wordChecker = new WordChecker(wordToGuess, wordToGuessFormat);
+        jLabel5.setText(wordToGuessFormat);
     }
 
     /**
@@ -131,6 +201,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         scoreLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        labelWrongOrCorrect = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hangman Game");
@@ -527,69 +598,18 @@ public class HangmanGameUI extends javax.swing.JFrame {
 
         jButton1.setText("Skip");
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 100, -1));
+
+        scoreLabel.setText("100");
         getContentPane().add(scoreLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 50, 20));
 
         jLabel1.setText("Score:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 50, 20));
+        getContentPane().add(labelWrongOrCorrect, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 110, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void performSomeTask(JButton b, char l) {
-        b.setEnabled(false);
-        guess = cw.checkLetter(l);
-        guessedString = cw.correctlyGuessedFormat;
-        displayGuessedString();
-    }
-    //method: displayWordFormat
-    //purpose: This method gets the hint, or the "_ _ _" for each word and displays it to the screen.
 
-    public void displayWordFormat() {
-        wordToGuess = wb.getWord();
-        wordToGuessFormat = wb.getWordFormat();
-        cw = new CheckWord(wordToGuess, wordToGuessFormat);
-        jLabel5.setText(wordToGuessFormat);
-    }
 
-    public void displayGuessedString() {
-        numWrong = cw.numWrongGuesses;
-        jLabel6.setText(guessedString);
-        if (numWrong > 0 && !guess) {
-            if (numWrong <= maxWrong) {
-                switch (numWrong) {
-                    case 1:
-                        labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_1.png"))); // NOI18N
-                        score = "90";
-                        break;
-                    case 2:
-                        labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_2.png"))); // NOI18N
-                        score = "80";
-                        break;
-                    case 3:
-                        labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_3.png"))); // NOI18N
-                        score = "70";
-                        break;
-                    case 4:
-                        labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_4.png"))); // NOI18N
-                        score = "60";
-                        break;
-                    case 5:
-                        labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_5.png"))); // NOI18N
-                        score = "50";
-                        break;
-                    case 6:
-                        labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_6.png"))); // NOI18N
-                        score = "40";
-                        dispose();
-                        break;
-                }
-                scoreLabel.setText(score);
-            }
-        } else if (guess) {
-            if (cw.checkGuesses()) {
-                dispose();
-            }
-        }
-    }
     private void buttonAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAActionPerformed
         // TODO add your handling code here:
         performSomeTask(buttonA, 'a');
@@ -721,41 +741,6 @@ public class HangmanGameUI extends javax.swing.JFrame {
         performSomeTask(buttonN, 'n');
     }//GEN-LAST:event_buttonNActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HangmanGameUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HangmanGameUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HangmanGameUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HangmanGameUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HangmanGameUI().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonA;
@@ -791,6 +776,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
     private javax.swing.JLabel labelDateTime;
     private javax.swing.JLabel labelPictureHangman;
     private javax.swing.JLabel labelTitle;
+    private javax.swing.JLabel labelWrongOrCorrect;
     private javax.swing.JLabel scoreLabel;
     // End of variables declaration//GEN-END:variables
 

@@ -13,6 +13,7 @@ import javax.swing.*;
  */
 public class Main {
     public static void main(String[] args) {
+        HangmanGameUI hman = new HangmanGameUI();
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 400);
