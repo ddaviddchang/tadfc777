@@ -95,6 +95,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new HangmanGameUI().setVisible(true);
+                new Menu().setVisible(true);
             }
         });
     }
@@ -128,25 +129,37 @@ public class HangmanGameUI extends javax.swing.JFrame {
                     case 6:
                         labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_6.png"))); // NOI18N
                         score = "40";
-                        labelWrongOrCorrect.setText("Incorrect!!!");
-                        dispose();
+                        labelWrongOrCorrect.setText("--Game Over--");
+                        gameOverWordLabel.setText("Word was: " + wordToGuess);
+                        buttonSkip.setEnabled(false);
+                        //dispose();
                         break;
                 }
                 scoreLabel.setText(score);
             }
         } else if (guess) {
             labelWrongOrCorrect.setText("Correct!!!");
+            
+            //If win condition is met (word is correctly guessed)
             if (wordChecker.checkGuesses()) {
-                dispose();
+                labelWrongOrCorrect.setText("WINNER!");
+                buttonSkip.setEnabled(false);
+                //dispose();
             }
         }
     }
-
+    
+    //method: performSomeTask
+    //purpose: This method is used to take a letter from a button and then calls 
+    //the checkLetter method to see if its found in the word. This method also
+    //turns the button off and updates our guessed word string.
     private void performSomeTask(JButton b, char l) {
-        b.setEnabled(false);
-        guess = wordChecker.checkLetter(l);
-        guessedString = wordChecker.guessCorrectlyFormat;
-        displayGuessedString();
+        if(numWrong < maxWrong && !wordChecker.checkGuesses()){
+            b.setEnabled(false);
+            guess = wordChecker.checkLetter(l);
+            guessedString = wordChecker.guessCorrectlyFormat;
+            displayGuessedString();
+        }
     }
 
     //method: displayWordFormat
@@ -198,10 +211,11 @@ public class HangmanGameUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         labelDateTime = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        buttonSkip = new javax.swing.JButton();
         scoreLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         labelWrongOrCorrect = new javax.swing.JLabel();
+        gameOverWordLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hangman Game");
@@ -596,8 +610,13 @@ public class HangmanGameUI extends javax.swing.JFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 300, 30));
         getContentPane().add(labelDateTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 170, 20));
 
-        jButton1.setText("Skip");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 100, -1));
+        buttonSkip.setText("Skip");
+        buttonSkip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSkipActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonSkip, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 100, -1));
 
         scoreLabel.setText("100");
         getContentPane().add(scoreLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 50, 20));
@@ -605,11 +624,14 @@ public class HangmanGameUI extends javax.swing.JFrame {
         jLabel1.setText("Score:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 50, 20));
         getContentPane().add(labelWrongOrCorrect, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 110, 20));
+        getContentPane().add(gameOverWordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 140, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+    //method: button#ActionPerformed
+    //purpose: These letter button action performed methods pass the button and the
+    //letter it contains into the performSomeTask method
     private void buttonAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAActionPerformed
         // TODO add your handling code here:
         performSomeTask(buttonA, 'a');
@@ -741,6 +763,21 @@ public class HangmanGameUI extends javax.swing.JFrame {
         performSomeTask(buttonN, 'n');
     }//GEN-LAST:event_buttonNActionPerformed
 
+    
+    //method: buttonSkipActionPerformed
+    //purpose: This is the skip buttons action method. When the button is pressed
+    //it sets score to 0, sets numWrong to maxWrong, updates the hangman picture to the fully drawn one, 
+    //displays the wordToGuess, and displays "-Game Forfeited-" above the game.
+    private void buttonSkipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSkipActionPerformed
+        score = "0";
+        scoreLabel.setText(score);
+        labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_6.png")));
+        labelWrongOrCorrect.setText("-Game Forfeited-");
+        gameOverWordLabel.setText("Word was: " + wordToGuess);
+        numWrong = maxWrong;
+        buttonSkip.setEnabled(false);
+    }//GEN-LAST:event_buttonSkipActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonA;
@@ -762,6 +799,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
     private javax.swing.JButton buttonQ;
     private javax.swing.JButton buttonR;
     private javax.swing.JButton buttonS;
+    private javax.swing.JButton buttonSkip;
     private javax.swing.JButton buttonT;
     private javax.swing.JButton buttonU;
     private javax.swing.JButton buttonV;
@@ -769,7 +807,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
     private javax.swing.JButton buttonX;
     private javax.swing.JButton buttonY;
     private javax.swing.JButton buttonZ;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel gameOverWordLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
