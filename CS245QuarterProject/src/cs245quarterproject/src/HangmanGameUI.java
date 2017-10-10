@@ -11,6 +11,7 @@ package cs245quarterproject.src;
  * **************************************************************
  *
  */
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
@@ -47,18 +48,17 @@ public class HangmanGameUI extends javax.swing.JFrame {
     public HangmanGameUI() {
 
         initComponents();
-        this.setLocationRelativeTo(null);
         this.setSize(new Dimension(600, 400));
-        this.pack();
-        this.setVisible(true);
-
+        this.getContentPane().setBackground(Color.WHITE);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        center = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
         wb = new Words();
         score = "100";
         currentDateAndTime();
         displayWordFormat();
+        this.pack();
+
+        this.setVisible(true);
     }
 
     //method: currentDateAndTime()
@@ -99,7 +99,12 @@ public class HangmanGameUI extends javax.swing.JFrame {
         });
     }
 
-    public void displayGuessedString() {
+    /*
+    method: displayGuessedString
+    purpose: Checks the user key input and compares with the actual letter. If 
+    correct, updates the letter in screen if not reduces the score and disables the keys
+    */
+    public void displayGuessedString() throws InterruptedException {
         numWrong = wordChecker.numberOfWrongGuesses;
         jLabel6.setText(guessedString);
         if (numWrong > 0 && !guess) {
@@ -108,27 +113,38 @@ public class HangmanGameUI extends javax.swing.JFrame {
                     case 1:
                         labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_1.png"))); // NOI18N
                         score = "90";
+                        labelWrongOrCorrect.setText("Incorrect!!!");
                         break;
                     case 2:
                         labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_2.png"))); // NOI18N
                         score = "80";
+                        labelWrongOrCorrect.setText("Incorrect!!!");
                         break;
                     case 3:
                         labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_3.png"))); // NOI18N
                         score = "70";
+                        labelWrongOrCorrect.setText("Incorrect!!!");
                         break;
                     case 4:
                         labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_4.png"))); // NOI18N
                         score = "60";
+                        labelWrongOrCorrect.setText("Incorrect!!!");
                         break;
                     case 5:
                         labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_5.png"))); // NOI18N
                         score = "50";
+                        labelWrongOrCorrect.setText("Incorrect!!!");
                         break;
                     case 6:
                         labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/r_6.png"))); // NOI18N
                         score = "40";
                         labelWrongOrCorrect.setText("Incorrect!!!");
+                        try {
+                            Thread.sleep(2000);
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                        new GameOverGUI(score);
                         dispose();
                         break;
                 }
@@ -137,16 +153,26 @@ public class HangmanGameUI extends javax.swing.JFrame {
         } else if (guess) {
             labelWrongOrCorrect.setText("Correct!!!");
             if (wordChecker.checkGuesses()) {
+                new GameOverGUI(score);
                 dispose();
             }
         }
     }
 
+     /*
+    method: performSomeTask
+    purpose: repetetive work made into a method. This is something that is done
+    everytime a key is hit.
+    */
     private void performSomeTask(JButton b, char l) {
         b.setEnabled(false);
         guess = wordChecker.checkLetter(l);
         guessedString = wordChecker.guessCorrectlyFormat;
-        displayGuessedString();
+        try {
+            displayGuessedString();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     //method: displayWordFormat
@@ -195,17 +221,19 @@ public class HangmanGameUI extends javax.swing.JFrame {
         buttonO = new javax.swing.JButton();
         buttonN = new javax.swing.JButton();
         labelPictureHangman = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         labelDateTime = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         scoreLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         labelWrongOrCorrect = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hangman Game");
+        setMaximumSize(new java.awt.Dimension(600, 400));
         setMinimumSize(new java.awt.Dimension(600, 400));
+        setPreferredSize(new java.awt.Dimension(600, 400));
         setResizable(false);
         setSize(new java.awt.Dimension(600, 400));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -226,7 +254,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonAActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonA, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 330, 31, 25));
+        getContentPane().add(buttonA, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 300, 31, 25));
 
         buttonB.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonB.setText("B");
@@ -240,7 +268,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonBActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonB, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 330, 31, 25));
+        getContentPane().add(buttonB, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 300, 31, 25));
 
         buttonC.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonC.setText("C");
@@ -254,7 +282,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonCActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonC, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 330, 31, 25));
+        getContentPane().add(buttonC, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 300, 31, 25));
 
         buttonD.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonD.setText("D");
@@ -268,7 +296,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonDActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonD, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 330, 31, 25));
+        getContentPane().add(buttonD, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 300, 31, 25));
 
         buttonE.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonE.setText("E");
@@ -282,7 +310,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonEActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonE, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 330, 31, 25));
+        getContentPane().add(buttonE, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 300, 31, 25));
 
         buttonF.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonF.setText("F");
@@ -296,7 +324,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonFActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonF, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 330, 31, 25));
+        getContentPane().add(buttonF, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 300, 31, 25));
 
         buttonG.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonG.setText("G");
@@ -310,7 +338,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonGActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonG, new org.netbeans.lib.awtextra.AbsoluteConstraints(281, 330, 31, 25));
+        getContentPane().add(buttonG, new org.netbeans.lib.awtextra.AbsoluteConstraints(281, 300, 31, 25));
 
         buttonH.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonH.setText("H");
@@ -324,7 +352,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonHActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonH, new org.netbeans.lib.awtextra.AbsoluteConstraints(319, 330, 31, 25));
+        getContentPane().add(buttonH, new org.netbeans.lib.awtextra.AbsoluteConstraints(319, 300, 31, 25));
 
         buttonJ.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonJ.setText("J");
@@ -338,7 +366,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonJActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonJ, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 330, 31, 25));
+        getContentPane().add(buttonJ, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 300, 31, 25));
 
         buttonI.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonI.setText("I");
@@ -352,7 +380,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonIActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonI, new org.netbeans.lib.awtextra.AbsoluteConstraints(357, 330, 31, 25));
+        getContentPane().add(buttonI, new org.netbeans.lib.awtextra.AbsoluteConstraints(357, 300, 31, 25));
 
         buttonK.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonK.setText("K");
@@ -366,7 +394,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonKActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonK, new org.netbeans.lib.awtextra.AbsoluteConstraints(433, 330, 31, 25));
+        getContentPane().add(buttonK, new org.netbeans.lib.awtextra.AbsoluteConstraints(433, 300, 31, 25));
 
         buttonL.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonL.setText("L");
@@ -380,7 +408,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonLActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonL, new org.netbeans.lib.awtextra.AbsoluteConstraints(471, 330, 31, 25));
+        getContentPane().add(buttonL, new org.netbeans.lib.awtextra.AbsoluteConstraints(471, 300, 31, 25));
 
         buttonM.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonM.setText("M");
@@ -394,7 +422,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonMActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonM, new org.netbeans.lib.awtextra.AbsoluteConstraints(509, 330, 31, 25));
+        getContentPane().add(buttonM, new org.netbeans.lib.awtextra.AbsoluteConstraints(509, 300, 31, 25));
 
         buttonZ.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonZ.setText("Z");
@@ -408,7 +436,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonZActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonZ, new org.netbeans.lib.awtextra.AbsoluteConstraints(509, 362, 31, 25));
+        getContentPane().add(buttonZ, new org.netbeans.lib.awtextra.AbsoluteConstraints(509, 330, 31, 25));
 
         buttonY.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonY.setText("Y");
@@ -422,7 +450,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonYActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonY, new org.netbeans.lib.awtextra.AbsoluteConstraints(471, 362, 31, 25));
+        getContentPane().add(buttonY, new org.netbeans.lib.awtextra.AbsoluteConstraints(471, 330, 31, 25));
 
         buttonX.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonX.setText("X");
@@ -436,7 +464,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonXActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonX, new org.netbeans.lib.awtextra.AbsoluteConstraints(433, 362, 31, 25));
+        getContentPane().add(buttonX, new org.netbeans.lib.awtextra.AbsoluteConstraints(433, 330, 31, 25));
 
         buttonW.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonW.setText("W");
@@ -450,7 +478,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonWActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonW, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 362, 31, 25));
+        getContentPane().add(buttonW, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 330, 31, 25));
 
         buttonV.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonV.setText("V");
@@ -464,7 +492,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonVActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonV, new org.netbeans.lib.awtextra.AbsoluteConstraints(357, 362, 31, 25));
+        getContentPane().add(buttonV, new org.netbeans.lib.awtextra.AbsoluteConstraints(357, 330, 31, 25));
 
         buttonU.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonU.setText("U");
@@ -478,7 +506,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonUActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonU, new org.netbeans.lib.awtextra.AbsoluteConstraints(319, 362, 31, 25));
+        getContentPane().add(buttonU, new org.netbeans.lib.awtextra.AbsoluteConstraints(319, 330, 31, 25));
 
         buttonT.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonT.setText("T");
@@ -492,7 +520,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonTActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonT, new org.netbeans.lib.awtextra.AbsoluteConstraints(281, 362, 31, 25));
+        getContentPane().add(buttonT, new org.netbeans.lib.awtextra.AbsoluteConstraints(281, 330, 31, 25));
 
         buttonS.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonS.setText("S");
@@ -506,7 +534,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonSActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonS, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 362, 31, 25));
+        getContentPane().add(buttonS, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 330, 31, 25));
 
         buttonR.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonR.setText("R");
@@ -520,7 +548,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonRActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonR, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 362, 31, 25));
+        getContentPane().add(buttonR, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 330, 31, 25));
 
         buttonQ.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonQ.setText("Q");
@@ -534,7 +562,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonQActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonQ, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 362, 31, 25));
+        getContentPane().add(buttonQ, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 330, 31, 25));
 
         buttonP.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonP.setText("P");
@@ -548,7 +576,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonPActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 362, 31, 25));
+        getContentPane().add(buttonP, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 330, 31, 25));
 
         buttonO.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonO.setText("O");
@@ -562,7 +590,7 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonOActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonO, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 362, 31, 25));
+        getContentPane().add(buttonO, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 330, 31, 25));
 
         buttonN.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         buttonN.setText("N");
@@ -576,35 +604,37 @@ public class HangmanGameUI extends javax.swing.JFrame {
                 buttonNActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonN, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 362, 31, 25));
+        getContentPane().add(buttonN, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 330, 31, 25));
 
         labelPictureHangman.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         labelPictureHangman.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/default.png"))); // NOI18N
-        getContentPane().add(labelPictureHangman, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 42, -1, 225));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel6.setName(""); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 300, 30));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setAlignmentY(0.0F);
-        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 300, 30));
+        getContentPane().add(labelPictureHangman, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 400, 200));
         getContentPane().add(labelDateTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 170, 20));
 
         jButton1.setText("Skip");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 100, -1));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 250, 100, -1));
 
         scoreLabel.setText("100");
-        getContentPane().add(scoreLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 50, 20));
+        getContentPane().add(scoreLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 50, 20));
 
         jLabel1.setText("Score:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 50, 20));
-        getContentPane().add(labelWrongOrCorrect, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 110, 20));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 50, 20));
+
+        labelWrongOrCorrect.setForeground(new java.awt.Color(51, 204, 0));
+        getContentPane().add(labelWrongOrCorrect, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 110, 20));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel5.setToolTipText("");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -740,6 +770,12 @@ public class HangmanGameUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         performSomeTask(buttonN, 'n');
     }//GEN-LAST:event_buttonNActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new GameOverGUI(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

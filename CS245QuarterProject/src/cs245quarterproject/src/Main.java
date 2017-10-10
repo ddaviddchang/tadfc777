@@ -4,7 +4,18 @@
  * and open the template in the editor.
  */
 package cs245quarterproject.src;
-
+/**
+ * *************************************************************
+ * file: Main.java 
+ * author: Tomik Aghajanian 
+ * class: Computer Programming
+ * Graphical User Interfaces - CS245
+ *
+ * assignment: Program 1 date last modified: 10/09/2017
+ *
+ * purpose: Defines the Driver of the entire program
+ * **************************************************************
+ **/
 import javax.swing.*;
 
 /**
@@ -12,13 +23,9 @@ import javax.swing.*;
  * @author fabian
  */
 public class Main {
+
     public static void main(String[] args) {
-        HangmanGameUI hman = new HangmanGameUI();
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 400);
-        TitleScreen title = new TitleScreen();
-        frame.add(title);
-        frame.setVisible(true);
+        new TitleScreen();
+        new Menu();        
     }
 }

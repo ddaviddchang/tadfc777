@@ -5,17 +5,29 @@
  */
 package cs245quarterproject.src;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.JFrame;
+
 /**
  *
  * @author mannyjuarez
  */
-public class Menu extends javax.swing.JPanel {
+public class Menu extends javax.swing.JFrame {
 
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
+        
+        this.setTitle("Main Screen");
+        this.getContentPane().setBackground(Color.WHITE);
+        this.setSize(new Dimension(600, 400));
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
     }
 
     /**
@@ -27,19 +39,72 @@ public class Menu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        labelPictureHangman = new javax.swing.JLabel();
+
+        setMaximumSize(new java.awt.Dimension(600, 400));
+        setMinimumSize(new java.awt.Dimension(600, 400));
+        setPreferredSize(new java.awt.Dimension(600, 400));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton1.setText("HighScores");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, 190, 50));
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton2.setText("Credits");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, 190, 50));
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton3.setText("Play");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 190, 50));
+
+        labelPictureHangman.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        labelPictureHangman.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelPictureHangman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/logo.png"))); // NOI18N
+        add(labelPictureHangman, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 300, 310));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new HangmanGameUI();
+        dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new HighScores();
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        new Credits();
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel labelPictureHangman;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,5 +1,18 @@
 package cs245quarterproject.src;
 
+/**
+ * *************************************************************
+ * file: WordChecker.java
+ * author: Tomik Aghajanian 
+ * class: Computer Programming
+ * Graphical User Interfaces - CS245
+ *
+ * assignment: Program 1 date last modified: 10/09/2017
+ *
+ * purpose: Handles anything necessary with checking the word, such as guessing
+ * the correct letters, guesses
+ * **************************************************************
+ **/
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -5,17 +5,44 @@
  */
 package cs245quarterproject.src;
 
+import java.awt.Dimension;
+import javax.swing.JFrame;
+
+
 /**
+ * *************************************************************
+ * file: Title.java 
+ * author: 
+ * class: Computer Programming
+ * Graphical User Interfaces - CS245
  *
- * @author mannyjuarez
- */
-public class TitleScreen extends javax.swing.JPanel {
+ * assignment: Program 1 date last modified: 10/09/2017
+ *
+ * purpose: Defines the Title screen
+ * **************************************************************
+ **/
+public class TitleScreen extends javax.swing.JFrame {
 
     /**
      * Creates new form TitleScreen
      */
     public TitleScreen() {
         initComponents();
+
+        this.setTitle("Intro");
+        this.setSize(new Dimension(600, 400));
+        this.pack();
+        this.setVisible(true);
+
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         try {
+            Thread.sleep(3000);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        dispose(); 
+        
     }
 
     /**
@@ -45,7 +72,7 @@ public class TitleScreen extends javax.swing.JPanel {
         jPanel2.setPreferredSize(new java.awt.Dimension(600, 200));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel3.setForeground(java.awt.Color.white);
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("CS 245 Quarter Project");
@@ -57,7 +84,7 @@ public class TitleScreen extends javax.swing.JPanel {
         jPanel3.setPreferredSize(new java.awt.Dimension(600, 200));
         jPanel3.setLayout(new java.awt.BorderLayout());
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel4.setForeground(java.awt.Color.white);
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("By: Diaz Disciples");
