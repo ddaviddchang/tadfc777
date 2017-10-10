@@ -34,4 +34,4 @@ public class Score {
     public int getScore() { return score; }
     public void setName(String n) { name = n; }
     public void setScore(int s ) { score = s; }
-}0
+}
