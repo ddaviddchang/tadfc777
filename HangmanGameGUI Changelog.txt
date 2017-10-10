@@ -1,0 +1,28 @@
+Changelog for HangmanGameGUI.java
+
+******
+10/9/2017 10:30pm
+	-added gameOverWordLabel under the scoreLabel
+		This displays the word in the event of a game over
+		otherwise its empty
+	
+	-Gave the skip button functionality
+		Sets score to 0
+		sets numWrong to maxWrong
+		sets gameOverWordLabel to display the word
+		Updates labelPictureHangman to r_6.png
+		sets WrongOrCorrect Label to "-Game Forfeited-"
+		
+	-Changed and added code to DisplayGuessedString	
+		changed case6 to display the wordToGuess on the gameOverWordLabel
+		case6 also disables the skip button now
+		commented out dispose() may be re added later
+		added code for the win condition in the elseif block
+			when the win condition is met "Winner" is displayed and the skip button is disabled
+	
+	-Changed performSomeTask
+		the block of code of performSomeTask is now inside a conditional statement
+		the code is only executed if the player is not at maxwrong and the word is not already guessed
+	
+	-Added some comments
+******
