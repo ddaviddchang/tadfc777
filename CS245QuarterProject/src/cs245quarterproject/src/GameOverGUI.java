@@ -11,7 +11,8 @@ package cs245quarterproject.src;
  **/
 import java.awt.Color;
 import java.awt.Dimension;
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.util.Comparator;
 
 
 public class GameOverGUI extends javax.swing.JFrame {
@@ -46,6 +47,35 @@ public class GameOverGUI extends javax.swing.JFrame {
         jLabel3.setText(score);
         
         this.setVisible(true);
+        
+        // Input dialog for player's name
+        JOptionPane optionPane = new JOptionPane();
+        String name = (String) optionPane.showInputDialog(this.rootPane,
+                "Enter your name:\n", "Name Prompt", JOptionPane.PLAIN_MESSAGE);
+        Score scoreObj = new Score(name, Integer.parseInt(score));
+        sortScores(scoreObj);
+    }
+    
+    /*
+    method: sortScores
+    purpose: sort scores in list and remove lowest score
+    */
+    private void sortScores(Score s) {
+        Main.SCORES.add(s);
+        Main.SCORES.sort(new ScoreComp());
+        if (Main.SCORES.size() > 5)
+            Main.SCORES.remove(Main.SCORES.size() - 1);
+    }
+    
+    private class ScoreComp implements Comparator<Score> {
+        public int compare(Score a, Score b) {
+            if (a.getScore() > b.getScore())
+                return 1;
+            else if (a.getScore() < b.getScore())
+                return -1;
+            else
+                return 0;
+        }
     }
     
     /**

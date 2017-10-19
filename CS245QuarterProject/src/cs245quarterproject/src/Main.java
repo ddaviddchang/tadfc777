@@ -13,6 +13,7 @@ package cs245quarterproject.src;
  * purpose: Defines the Driver of the entire program
  * **************************************************************
  **/
+import java.util.ArrayList;
 import javax.swing.*;
 
 /**
@@ -20,7 +21,7 @@ import javax.swing.*;
  * @author fabian
  */
 public class Main {
-    public static String[] SCORE = new String[5]; //used later for highscores
+    public static ArrayList<Score> SCORES = new ArrayList<Score>(); //used later for highscores
 
     public static void main(String[] args) {
         new TitleScreen();
