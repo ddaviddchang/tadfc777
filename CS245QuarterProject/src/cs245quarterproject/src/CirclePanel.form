@@ -107,50 +107,25 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JButton" name="CircleButton1">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CircleButton1.setContentAreaFilled(false);&#xa;CircleButton1.setBorderPainted(false);&#xa;CircleButton1.setBorder(BorderFactory.createEmptyBorder());"/>
-        <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="//CircleButton1.setIcon(new ImageIcon(&quot;RedButton.png&quot;));&#xa;CircleButton1.addChangeListener(this);"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="CircleButton2">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CircleButton2.setContentAreaFilled(false);&#xa;CircleButton2.setBorderPainted(false);&#xa;CircleButton2.setBorder(BorderFactory.createEmptyBorder());&#xa;CircleButton2.addChangeListener(this);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CircleButton2.setContentAreaFilled(false);&#xa;CircleButton2.setBorderPainted(false);&#xa;CircleButton2.setBorder(BorderFactory.createEmptyBorder());&#xa;CircleButton2.addChangeListener(this);&#xa;CircleButton2.addActionListener(this);"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="CircleButton3">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CircleButton3.setContentAreaFilled(false);&#xa;CircleButton3.setBorderPainted(false);&#xa;CircleButton3.setBorder(BorderFactory.createEmptyBorder());&#xa;CircleButton3.addChangeListener(this);"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="CircleButton4">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CircleButton4.setContentAreaFilled(false);&#xa;CircleButton4.setBorderPainted(false);&#xa;CircleButton4.setBorder(BorderFactory.createEmptyBorder());&#xa;CircleButton4.addChangeListener(this);"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="CircleButton5">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CircleButton5.setContentAreaFilled(false);&#xa;CircleButton5.setBorderPainted(false);&#xa;CircleButton5.setBorder(BorderFactory.createEmptyBorder());&#xa;CircleButton5.addChangeListener(this);"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="CircleButton6">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CircleButton6.setContentAreaFilled(false);&#xa;CircleButton6.setBorderPainted(false);&#xa;CircleButton6.setBorder(BorderFactory.createEmptyBorder());&#xa;CircleButton6.addChangeListener(this);"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="CircleButton7">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CircleButton7.setContentAreaFilled(false);&#xa;CircleButton7.setBorderPainted(false);&#xa;CircleButton7.setBorder(BorderFactory.createEmptyBorder());&#xa;CircleButton7.addChangeListener(this);"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="CircleButton8">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CircleButton8.setContentAreaFilled(false);&#xa;CircleButton8.setBorderPainted(false);&#xa;CircleButton8.setBorder(BorderFactory.createEmptyBorder());&#xa;CircleButton8.addChangeListener(this);"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="CircleButton9">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CircleButton9.setContentAreaFilled(false);&#xa;CircleButton9.setBorderPainted(false);&#xa;CircleButton9.setBorder(BorderFactory.createEmptyBorder());&#xa;CircleButton9.addChangeListener(this);"/>
-      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

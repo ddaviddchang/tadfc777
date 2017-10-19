@@ -5,6 +5,8 @@
  */
 package CirclePackage;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.BorderFactory;
@@ -18,38 +20,68 @@ import javax.swing.event.ChangeListener;
  *
  * @author Stream17
  */
-public class CirclePanel extends javax.swing.JPanel implements ChangeListener {
-    private ArrayList<JButton> buttonList;
+public class CirclePanel extends javax.swing.JPanel implements ChangeListener, ActionListener {
+    private ArrayList<JButton> buttonList = new ArrayList();
     private String[]Colors = {"Red","Yellow","Blue","Purple","Green"};
+    private final int TOTAL_CIRCLES = 9;
     /**
      * Creates new form CirclePanel
      */
     public CirclePanel() {
         initComponents();
-        spawnButtons();
+
+        
         //remove(CircleButton2);
         setVisible(true);
         setOpaque(true);
+        buttonList.add(CircleButton1);
+        buttonList.add(CircleButton2);
+        buttonList.add(CircleButton3);
+        buttonList.add(CircleButton4);
+        buttonList.add(CircleButton5);
+        buttonList.add(CircleButton6);
+        buttonList.add(CircleButton7);
+        buttonList.add(CircleButton8);
+        buttonList.add(CircleButton9);
+        
+        initCircleButtons();
+        spawnButtons();
     }
     
     /**
      * Incomplete method
-     * SpawnButtons needs to randomly pick 5 of our nine buttons and set their action commands to Colors
-     * from the Colors array.
-     * It also needs to set the Buttons' ImageIcons in the format 
-     * new ImageIcon(Colors[i] + "Button.png")
+     * spawnButtons() shuffles the contents of the buttonList which contains
+     * all of this panels circle buttons. It then sets the action commands and icons 
+     * of the first five buttons in the shuffled collection to their designated color from
+     * Colors[]
      */
     private void spawnButtons(){
-        CircleButton1.setActionCommand(Colors[0]);
-        CircleButton1.setIcon(new ImageIcon(Colors[0] + "Button.png"));
+        Collections.shuffle(buttonList);
+        for(int i = 0; i < 5; i++){
+            buttonList.get(i).setActionCommand(Colors[i]);
+            buttonList.get(i).setIcon(new ImageIcon(Colors[i] + "Button.png"));
+        }
         
-        CircleButton4.setActionCommand(Colors[1]);
-        CircleButton4.setIcon(new ImageIcon(Colors[1] + "Button.png"));
-        
-        CircleButton8.setActionCommand(Colors[2]);
-        CircleButton8.setIcon(new ImageIcon(Colors[2] + "Button.png"));
+        for(int i = 5; i < 9; i++){
+            buttonList.get(i).setActionCommand(null);
+            buttonList.get(i).setIcon(null);
+        }
     }
-
+    
+    /**
+     * This method gets rid of the backgrounds of all the buttons in 
+     * buttonList and also registers this panel as their action and change
+     * listeners.
+     */
+    private void initCircleButtons(){
+        for(int i = 0; i < TOTAL_CIRCLES; i++){
+            buttonList.get(i).addActionListener(this);
+            buttonList.get(i).addChangeListener(this);
+            buttonList.get(i).setContentAreaFilled(false);
+            buttonList.get(i).setBorderPainted(false);
+            buttonList.get(i).setBorder(BorderFactory.createEmptyBorder());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,51 +101,11 @@ public class CirclePanel extends javax.swing.JPanel implements ChangeListener {
         CircleButton8 = new javax.swing.JButton();
         CircleButton9 = new javax.swing.JButton();
 
-        CircleButton1.setContentAreaFilled(false);
-        CircleButton1.setBorderPainted(false);
-        CircleButton1.setBorder(BorderFactory.createEmptyBorder());
-        //CircleButton1.setIcon(new ImageIcon("RedButton.png"));
-        CircleButton1.addChangeListener(this);
-
         CircleButton2.setContentAreaFilled(false);
         CircleButton2.setBorderPainted(false);
         CircleButton2.setBorder(BorderFactory.createEmptyBorder());
         CircleButton2.addChangeListener(this);
-
-        CircleButton3.setContentAreaFilled(false);
-        CircleButton3.setBorderPainted(false);
-        CircleButton3.setBorder(BorderFactory.createEmptyBorder());
-        CircleButton3.addChangeListener(this);
-
-        CircleButton4.setContentAreaFilled(false);
-        CircleButton4.setBorderPainted(false);
-        CircleButton4.setBorder(BorderFactory.createEmptyBorder());
-        CircleButton4.addChangeListener(this);
-
-        CircleButton5.setContentAreaFilled(false);
-        CircleButton5.setBorderPainted(false);
-        CircleButton5.setBorder(BorderFactory.createEmptyBorder());
-        CircleButton5.addChangeListener(this);
-
-        CircleButton6.setContentAreaFilled(false);
-        CircleButton6.setBorderPainted(false);
-        CircleButton6.setBorder(BorderFactory.createEmptyBorder());
-        CircleButton6.addChangeListener(this);
-
-        CircleButton7.setContentAreaFilled(false);
-        CircleButton7.setBorderPainted(false);
-        CircleButton7.setBorder(BorderFactory.createEmptyBorder());
-        CircleButton7.addChangeListener(this);
-
-        CircleButton8.setContentAreaFilled(false);
-        CircleButton8.setBorderPainted(false);
-        CircleButton8.setBorder(BorderFactory.createEmptyBorder());
-        CircleButton8.addChangeListener(this);
-
-        CircleButton9.setContentAreaFilled(false);
-        CircleButton9.setBorderPainted(false);
-        CircleButton9.setBorder(BorderFactory.createEmptyBorder());
-        CircleButton9.addChangeListener(this);
+        CircleButton2.addActionListener(this);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -223,5 +215,14 @@ public class CirclePanel extends javax.swing.JPanel implements ChangeListener {
         
         if(!mod.isRollover())
             ((JButton)ce.getSource()).setIcon(new ImageIcon(color + "Button.png"));
+    }
+
+    @Override
+    /**
+     * this method just spawns buttons for now
+     * feel free to add functionality for the game here.
+     */
+    public void actionPerformed(ActionEvent ae) {
+        spawnButtons();
     }
 }
